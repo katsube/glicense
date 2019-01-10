@@ -26,7 +26,7 @@ module.exports = class gLicense {
    */
 	constructor(type=null){
 		if(type !== null){
-			this.setLisence(type)
+			this.setLisence(type);
     }
     this.tmplfile = null;
 	}
@@ -87,6 +87,15 @@ module.exports = class gLicense {
     this.type = type;
     return(this);
   }
+  /**
+   * Get Lisence type
+   *
+   * @param void
+   * @return {String}
+   */
+  getLisence(){
+    return(this.type);
+  }
 
   /**
    * Set Template file path
@@ -97,5 +106,14 @@ module.exports = class gLicense {
   setTemplate(path){
     this.tmplfile = path;
     return(this);
+  }
+  /**
+   * Get Template file path
+   *
+   * @param {Void}
+   * @return {String}
+   */
+  getTemplate(){
+    return(this.tmplfile);
   }
 }
