@@ -19,30 +19,36 @@ const sprintf    = require('printf');
 // commander
 //--------------------------------------
 program
-  .version("1.0.0");
+  .version("0.5.0");
 
+//-------------------
+// glicense list
+//-------------------
 program
   .command('list')
   .alias('ls')
   .description('Display a list of supported licenses')
   .action((options)=>{
-	  const license = new genLicense();
-	  const ls = license.getLisenceList();
+    const license = new genLicense();
+    const ls = license.getLisenceList();
 
-	  console.log('-------- + -------------------------------------------------  ');
-	  console.log('  type   | License name');
-	  console.log('-------- + -------------------------------------------------  ');
-	  for(let i=0; i<ls.length; i++){
-		  console.log( sprintf('%8s | %s', ls[i].key, ls[i].name) );
-	  }
+    console.log('-------- + -------------------------------------------------  ');
+    console.log('  type   | License name');
+    console.log('-------- + -------------------------------------------------  ');
+    for(let i=0; i<ls.length; i++){
+      console.log( sprintf('%8s | %s', ls[i].key, ls[i].name) );
+    }
   })
   ;
 
+//-------------------
+// glicense detail
+//-------------------
 program
   .command('detail <type>')
   .description('View license details')
   .action((type)=>{
-	  const license = new genLicense();
+    const license = new genLicense();
     const info = license.getLisenceDetail(type.toLowerCase());
     if( info === null ){
       showError('Can not find license type:'+type);
@@ -52,6 +58,9 @@ program
   })
   ;
 
+//-------------------
+// glicense create
+//-------------------
 program
   .command('create <type>')
   .description('Create your license')
@@ -72,22 +81,29 @@ program
       showError('Please input Program name. (-p, --program option)');
     }
 
-    console.log(
-      license
-        .setLisence(type)
-        .get({
-            name: options.author
-          , year: options.year
-          , program: options.program
-          , description: options.description
-        })
-    );
+    let statement = license
+          .setLisence(type)
+          .setTemplate([__dirname, '..', info.file].join('/'))
+          .get({
+              name: options.author
+            , year: options.year
+            , program: options.program
+            , description: options.description
+    });
+    if(statement === false){
+      showError('Can not generate license file. (Template file error)');
+    }
+
+    console.log(statement);
   })
   ;
 
+//-------------------
+// glicense ?
+//-------------------
 program
   .command('*', {noHelp: true})
-  .action((env)=>{
+  .action(()=>{
     program.help();
   })
   ;
@@ -95,6 +111,9 @@ program
 program.parse(process.argv);
 
 
+//--------------------------------------
+// Zero arguments
+//--------------------------------------
 if( program.args.length === 0 ){
   program.help();
 }

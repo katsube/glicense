@@ -1,37 +1,37 @@
 {
 	"apache2":{
 		  "name":"Apache License"
-		, "file":"../template/apache2.mst"
+		, "file":"template/apache2.mst"
 		, "require":["year", "name"]
 	},
 	"bsd2c":{
 		  "name":"BSD 2-Clause License"
-		, "file":"../template/bsd2c.mst"
+		, "file":"template/bsd2c.mst"
 		, "require":["year", "name"]
 	},
 	"bsd3c":{
 		  "name":"BSD 3-Clause License"
-		, "file":"../template/bsd3c.mst"
+		, "file":"template/bsd3c.mst"
 		, "require":["year", "name"]
 	},
 	"gpl3":{
 		  "name":"GNU GENERAL PUBLIC LICENSE Version 3"
-		, "file":"../template/gpl3.mst"
+		, "file":"template/gpl3.mst"
 		, "require":["year", "name", "program", "description"]
 	},
 	"lgpl3":{
 		  "name":"GNU LESSER GENERAL PUBLIC LICENSE Version 3"
-		, "file":"../template/lgpl3.mst"
+		, "file":"template/lgpl3.mst"
 		, "require":[]
 	},
 	"lgpl21":{
 		  "name":"GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"
-		, "file":"../template/lgpl21.mst"
+		, "file":"template/lgpl21.mst"
 		, "require":["year", "name", "program", "description"]
 	},
 	"mit":{
 		  "name":"MIT License"
-		, "file":"../template/mit.mst"
+		, "file":"template/mit.mst"
 		, "require":["year", "name"]
 	}
 }

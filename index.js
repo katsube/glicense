@@ -1,10 +1,29 @@
-'use strict';
+/**
+ * Generate Password class
+ *
+ * @author  M.Katsube <katsubemakito@gmail.com>
+ * @license MIT
+ */
 
+ 'use strict';
+
+//--------------------------------------
+// Module
+//--------------------------------------
 const fs = require('fs');
 const mustache = require('mustache');
 const licenses = require('./licenses.json');
 
+/**
+ * gLicense Class
+ */
 module.exports = class gLicense {
+  /**
+   * Constructor
+   *
+   * @param {String} type
+   * @return {void}
+   */
 	constructor(type=null){
 		if(type !== null){
 			this.setLisence(type)
@@ -12,16 +31,29 @@ module.exports = class gLicense {
     this.tmplfile = null;
 	}
 
+  /**
+   * Generate license statement
+   *
+   * @param {Object} opt
+   * @return {String}
+   */
 	get(opt){
     const file = (this.tmplfile!==null)? this.tmplfile:`template/${this.type}.mst`;
-		const tmpl = fs.readFileSync(file, {encoding: "utf-8"});
-    return( mustache.render(tmpl, opt) );
+    try{
+      const tmpl = fs.readFileSync(file, {encoding: "utf-8"});
+      return( mustache.render(tmpl, opt) );
+    }
+    catch(e){
+      return(false);
+    }
 	}
 
-	getList(){
-		return( licenses );
-	}
-
+  /**
+   * getLisenceList
+   *
+   * @param void
+   * @return {Object}
+   */
   getLisenceList(){
 		let result = [];
 		for(let l in licenses){
@@ -30,7 +62,13 @@ module.exports = class gLicense {
 		return(result);
 	}
 
-	getLisenceDetail(type){
+  /**
+   * getLisenceDetail
+   *
+   * @param {String} type
+   * @return {Object}
+   */
+  getLisenceDetail(type){
     if( type in licenses ){
       return(licenses[type]);
     }
@@ -39,10 +77,23 @@ module.exports = class gLicense {
     }
   }
 
+  /**
+   * Set Lisence type
+   *
+   * @param {String} type
+   * @return {Object}
+   */
   setLisence(type){
     this.type = type;
     return(this);
-	}
+  }
+
+  /**
+   * Set Template file path
+   *
+   * @param {String} path
+   * @return {Object}
+   */
   setTemplate(path){
     this.tmplfile = path;
     return(this);

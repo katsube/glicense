@@ -1,6 +1,6 @@
 {
   "name": "glicense",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "Generate software license for MIT, Apache,GPL and more",
   "main": "index.js",
   "preferGlobal": true,
