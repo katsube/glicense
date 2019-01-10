@@ -19,9 +19,13 @@ const sprintf    = require('printf');
 // commander
 //--------------------------------------
 program
-  .command('list', {isDefault: true})
+  .version("1.0.0");
+
+program
+  .command('list')
   .alias('ls')
-  .action(()=>{
+  .description('Display a list of supported licenses')
+  .action((options)=>{
 	  const license = new genLicense();
 	  const ls = license.getLisenceList();
 
@@ -35,24 +39,73 @@ program
   ;
 
 program
-  .command('detail')
-  .action(()=>{
+  .command('detail <type>')
+  .description('View license details')
+  .action((type)=>{
+	  const license = new genLicense();
+    const info = license.getLisenceDetail(type.toLowerCase());
+    if( info === null ){
+      showError('Can not find license type:'+type);
+    }
 
+    console.log(info);
   })
   ;
 
 program
-  .command('create')
-  .action(()=>{
-
-  })
-  ;
-
-program
-  .version("1.0.0")
-  .option('-t, --type <string>',        'License type')
+  .command('create <type>')
+  .description('Create your license')
   .option('-a, --author <string>',      'Author name')
-  .option('-y, --year <number>',        'Copyright year')
+  .option('-y, --year [number]',        'Copyright year. default:this year', new Date().getFullYear())
   .option('-p, --program [string]',     'Script name')
   .option('-d, --description [string]', 'Description')
-  .parse(process.argv);
+  .action((type, options)=>{
+    const license = new genLicense();
+    const info = license.getLisenceDetail(type.toLowerCase());
+    if( info === null ){
+      showError('Can not find license type:'+type);
+    }
+    if( ! ('author' in options) ){
+      showError('Please input Author name. (-a, --author option)');
+    }
+    if( (info.require.indexOf('program') === 1) && ! ('program' in options) ){
+      showError('Please input Program name. (-p, --program option)');
+    }
+
+    console.log(
+      license
+        .setLisence(type)
+        .get({
+            name: options.author
+          , year: options.year
+          , program: options.program
+          , description: options.description
+        })
+    );
+  })
+  ;
+
+program
+  .command('*', {noHelp: true})
+  .action((env)=>{
+    program.help();
+  })
+  ;
+
+program.parse(process.argv);
+
+
+if( program.args.length === 0 ){
+  program.help();
+}
+
+
+/**
+ * Show Error and exit process
+ *
+ * @param {String} msg
+ */
+function showError(msg){
+  console.error(`error: ${msg}`);
+  process.exit();
+}

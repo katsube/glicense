@@ -8,19 +8,21 @@ module.exports = class gLicense {
 	constructor(type=null){
 		if(type !== null){
 			this.setLisence(type)
-		}
+    }
+    this.tmplfile = null;
 	}
 
 	get(opt){
-		const tmpl = fs.readFileSync(`template/${this.type}.mst`, {encoding: "utf-8"});
-		return( mustache.render(tmpl, opt) );
+    const file = (this.tmplfile!==null)? this.tmplfile:`template/${this.type}.mst`;
+		const tmpl = fs.readFileSync(file, {encoding: "utf-8"});
+    return( mustache.render(tmpl, opt) );
 	}
 
 	getList(){
 		return( licenses );
 	}
 
-	getLisenceList(){
+  getLisenceList(){
 		let result = [];
 		for(let l in licenses){
 			result.push({key:l, name:licenses[l].name});
@@ -28,18 +30,21 @@ module.exports = class gLicense {
 		return(result);
 	}
 
-	setLisence(type){
-		this.type = type;
+	getLisenceDetail(type){
+    if( type in licenses ){
+      return(licenses[type]);
+    }
+    else{
+      return(null);
+    }
+  }
+
+  setLisence(type){
+    this.type = type;
+    return(this);
 	}
+  setTemplate(path){
+    this.tmplfile = path;
+    return(this);
+  }
 }
-
-
-/**
-Apache2.0 name, year
-BSD 2-Clause name, year
-BSD 3-Clause name, year
-GPL3.0    name, year, program, description
-LGPL3.0   
-LGPL2.1   name, year, program, description
-MIT       name, year
-*/
