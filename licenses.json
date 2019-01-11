@@ -19,6 +19,11 @@
 		, "file":"template/gpl3.mst"
 		, "require":["year", "name", "program", "description"]
 	},
+	"isc":{
+		"name":"ISC License"
+	  , "file":"template/isc.mst"
+	  , "require":["year", "name"]
+	},
 	"lgpl3":{
 		  "name":"GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 		, "file":"template/lgpl3.mst"
