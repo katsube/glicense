@@ -3,14 +3,9 @@
 `gLicense.js` is a library that generates OSS license statements. And command-line interface is also available.
 
 ## Installation
-### Library
-```shellsession
-$ npm install --save gLicense
-```
-
 ### Command line tool
 ```shellsession
-$ npm install -g gLicense
+$ npm install -g glicense
 ```
 
 ## Usage
@@ -97,17 +92,6 @@ $ glicense detail gpl3
   require: [ 'year', 'name', 'program', 'description' ] }
 ```
 
-### API
-```javascript
-const genLicense = require("genLicense");
-const license = new genLicense();
-
-console.log(
-	license
-		.setLicense('mit')
-		.get({name:'Your name', year:1979})
-);
-```
 
 ## License
 The MIT License.
