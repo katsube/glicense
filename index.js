@@ -84,7 +84,13 @@ module.exports = class gLicense {
    * @return {Object}
    */
   setLisence(type){
-    this.type = type;
+    if( type in licenses ){
+      this.type = type;
+    }
+    else{
+      throw new Error("Undefined license: " + type);
+    }
+
     return(this);
   }
   /**
