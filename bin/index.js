@@ -30,7 +30,7 @@ program
   .description('Display a list of supported licenses')
   .action((options)=>{
     const license = new genLicense();
-    const ls = license.getLisenceList();
+    const ls = license.getLicenseList();
 
     console.log('-------- + -------------------------------------------------  ');
     console.log('  type   | License name');
@@ -49,7 +49,7 @@ program
   .description('View license details')
   .action((type)=>{
     const license = new genLicense();
-    const info = license.getLisenceDetail(type.toLowerCase());
+    const info = license.getLicenseDetail(type.toLowerCase());
     if( info === null ){
       showError('Can not find license type:'+type);
     }
@@ -70,7 +70,7 @@ program
   .option('-d, --description [string]', 'Description')
   .action((type, options)=>{
     const license = new genLicense();
-    const info = license.getLisenceDetail(type.toLowerCase());
+    const info = license.getLicenseDetail(type.toLowerCase());
     if( info === null ){
       showError('Can not find license type:'+type);
     }
@@ -82,7 +82,7 @@ program
     }
 
     let statement = license
-          .setLisence(type)
+          .setLicense(type)
           .setTemplate([__dirname, '..', info.file].join('/'))
           .get({
               name: options.author

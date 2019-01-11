@@ -1,5 +1,5 @@
 /**
- * Generate Password class
+ * Generate License class
  *
  * @author  M.Katsube <katsubemakito@gmail.com>
  * @license MIT
@@ -24,12 +24,12 @@ module.exports = class gLicense {
    * @param {String} type
    * @return {void}
    */
-	constructor(type=null){
-		if(type !== null){
-			this.setLisence(type);
+  constructor(type=null){
+    if(type !== null){
+      this.setLicense(type);
     }
     this.tmplfile = null;
-	}
+  }
 
   /**
    * Generate license statement
@@ -37,8 +37,8 @@ module.exports = class gLicense {
    * @param {Object} opt
    * @return {String}
    */
-	get(opt){
-    const file = (this.tmplfile!==null)? this.tmplfile:`template/${this.type}.mst`;
+  get(opt){
+    const file = (this.tmplfile!==null)? this.tmplfile:`${__dirname}/template/${this.type}.mst`;
     try{
       const tmpl = fs.readFileSync(file, {encoding: "utf-8"});
       return( mustache.render(tmpl, opt) );
@@ -46,7 +46,7 @@ module.exports = class gLicense {
     catch(e){
       return(false);
     }
-	}
+  }
 
   /**
    * getLisenceList
@@ -54,13 +54,13 @@ module.exports = class gLicense {
    * @param void
    * @return {Object}
    */
-  getLisenceList(){
-		let result = [];
-		for(let l in licenses){
-			result.push({key:l, name:licenses[l].name});
-		}
-		return(result);
-	}
+  getLicenseList(){
+    let result = [];
+    for(let l in licenses){
+      result.push({key:l, name:licenses[l].name});
+    }
+    return(result);
+  }
 
   /**
    * getLisenceDetail
@@ -68,7 +68,7 @@ module.exports = class gLicense {
    * @param {String} type
    * @return {Object}
    */
-  getLisenceDetail(type){
+  getLicenseDetail(type){
     if( type in licenses ){
       return(licenses[type]);
     }
@@ -83,7 +83,7 @@ module.exports = class gLicense {
    * @param {String} type
    * @return {Object}
    */
-  setLisence(type){
+  setLicense(type){
     if( type in licenses ){
       this.type = type;
     }
@@ -99,7 +99,7 @@ module.exports = class gLicense {
    * @param void
    * @return {String}
    */
-  getLisence(){
+  getLicense(){
     return(this.type);
   }
 

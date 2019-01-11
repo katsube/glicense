@@ -53,33 +53,33 @@ test('get() - License type not set ', () => {
 //-------------------
 // Lisence
 //-------------------
-test('set/get Lisence type', () => {
+test('set/get License type', () => {
   const license = new gLicense();
   const type = 'apache2';
-  license.setLisence(type);
-  expect(license.getLisence()).toBe(type);
+  license.setLicense(type);
+  expect(license.getLicense()).toBe(type);
 });
-test('set/get Lisence type - undefined', () => {
+test('set/get License type - undefined', () => {
   const license = new gLicense();
-  expect( ()=>{license.setLisence('XXXXX')} ).toThrowError(Error);
+  expect( ()=>{license.setLicense('XXXXX')} ).toThrowError(Error);
 });
-test('set/get Lisence type - constructor', () => {
+test('set/get License type - constructor', () => {
   const type = 'mit';
   const license = new gLicense(type);
-  expect(license.getLisence()).toBe(type);
+  expect(license.getLicense()).toBe(type);
 });
 
-test('getLisenceList()', () => {
+test('getLicenseList()', () => {
   const license = new gLicense();
-  const buff = license.getLisenceList();
+  const buff = license.getLicenseList();
   expect(buff.length).toBe(Object.keys(licenses).length);
   expect(buff).toContainEqual({key:'mit', name:'MIT License'});
 });
 
-test('getLisenceDetail()', () => {
+test('getLicenseDetail()', () => {
   const license = new gLicense();
-  expect(license.getLisenceDetail('XXXXX')).toBe(null);
-  expect(license.getLisenceDetail('mit')).toBe(licenses['mit']);
+  expect(license.getLicenseDetail('XXXXX')).toBe(null);
+  expect(license.getLicenseDetail('mit')).toBe(licenses['mit']);
 });
 
 
