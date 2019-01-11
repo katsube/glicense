@@ -38,5 +38,10 @@
 		  "name":"MIT License"
 		, "file":"template/mit.mst"
 		, "require":["year", "name"]
-	}
+	},
+	"mpl2":{
+		"name":"Mozilla Public License Version 2.0"
+	  , "file":"template/mpl2.mst"
+	  , "require":[ ]
+  }
 }
