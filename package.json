@@ -15,7 +15,7 @@
     "url": "git+https://github.com/katsube/glicense.git"
   },
   "keywords": [
-    "MIT"
+    "GPL", "LGPL", "MIT", "BSD", "Apache", "License", "Generate"
   ],
   "author": "Makito Katsube <katsubemakito@gmail.com> (http://github.com/katsube)",
   "license": "MIT",
