@@ -3,6 +3,11 @@
 `gLicense.js` is a library that generates OSS license statements. And command-line interface is also available.
 
 ## Installation
+### Library
+```shellsession
+$ npm install --save glicense
+```
+
 ### Command line tool
 ```shellsession
 $ npm install -g glicense
@@ -92,6 +97,39 @@ $ glicense detail gpl3
   require: [ 'year', 'name', 'program', 'description' ] }
 ```
 
+### API
+#### Common Usage
+
+```javascript
+const gLicense = require('glicense');
+const license  = new gLicense();
+console.log(
+  license
+    .setLicense('mit')
+    .get({name:'M.Katsube', year:new Date().getFullYear()})
+);
+```
+
+#### use My License
+You can use original license.
+
+```javascript
+const gLicense = require('glicense');
+const license  = new gLicense();
+console.log(
+  license
+    .setTemplate('~/mylicense.mst')
+    .get({name:'M.Katsube', year:new Date().getFullYear()})
+);
+```
+
+Template must be use [mustache.js](https://github.com/janl/mustache.js)
+
+```
+$ cat ~/mylicense.mst
+My License
+Copyright (c) {{{year}}} {{{{name}}}
+```
 
 ## License
 The MIT License.
